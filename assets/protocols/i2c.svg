@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-labelledby="title desc">
+  <title id="title">I2C placeholder</title>
+  <desc id="desc">Text-based SVG placeholder for I2C documentation artwork.</desc>
+  <rect width="900" height="360" rx="28" fill="#f6f8fa"/>
+  <rect x="36" y="36" width="828" height="288" rx="20" fill="#ffffff" stroke="#0969da" stroke-width="6"/>
+  <circle cx="126" cy="180" r="54" fill="#ddf4ff" stroke="#0969da" stroke-width="5"/>
+  <path d="M218 180h464" stroke="#0969da" stroke-width="10" stroke-linecap="round" stroke-dasharray="24 22"/>
+  <path d="M690 132l78 48-78 48z" fill="#0969da"/>
+  <text x="450" y="162" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#24292f">I2C</text>
+  <text x="450" y="218" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#57606a">Documentation asset placeholder</text>
+</svg>
