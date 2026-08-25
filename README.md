@@ -689,17 +689,58 @@ Classic Arduino UNO is ideal for simple control and beginner wiring. ESP32 adds 
 
 ESP8266 made low-cost Wi-Fi projects popular. Boards include NodeMCU, Wemos D1 Mini, and ESP-01. It can run web servers, MQTT clients, HTTP clients, and smart-device firmware.
 
+**Practical ESP8266 details:**
+
+| Area | What to remember |
+|---|---|
+| Best use | Low-cost Wi-Fi sensors, switches, MQTT nodes, small web servers, and retrofits |
+| Power | Needs a stable 3.3 V supply; Wi-Fi transmit bursts can reset weak supplies |
+| Boot pins | Some GPIO pins affect boot mode, so avoid pulling them to the wrong level at reset |
+| Pin labels | Dev-board labels such as D1/D2 often differ from raw GPIO numbers |
+| ADC | Many modules expose limited analog input capability; check board scaling before applying voltage |
+| Firmware options | Arduino core, ESP8266 RTOS SDK, MicroPython, AT firmware, or custom C/C++ firmware |
+
+A good first ESP8266 path is: blink an LED, connect to Wi-Fi, serve a local page, publish MQTT telemetry, then add OTA update support.
+
 ### 🔹 10.2 ESP8266 Architecture
 
 ESP8266 integrates CPU, Wi-Fi radio, GPIO, UART, SPI, timers, and memory interfaces. Many development boards add USB-to-serial, voltage regulation, reset, and boot buttons.
+
+A typical ESP8266 development board is more than the chip itself:
+
+```text
+USB Port → USB-to-Serial → ESP8266 Module → GPIO / Sensors / Relays
+                 │              │
+             Boot/Reset      3.3 V Regulator
+```
+
+The module usually contains the ESP8266 SoC, RF circuitry, antenna, external flash, shielding, and castellated or header pins. The development board adds the hardware that makes it easy to power, program, and reset.
 
 ### 🔹 10.3 ESP8266 GPIO
 
 ESP8266 GPIO is useful but boot-strapping pins and board labels can be confusing. Board labels like D1 or D2 may not match raw GPIO numbers. Always check the exact board pinout before wiring relays, sensors, or displays.
 
+**GPIO checklist:**
+
+- Avoid pins that must be HIGH or LOW during boot unless the connected circuit preserves the boot state.
+- Use a transistor, MOSFET, optocoupler, or relay driver board for loads that exceed GPIO current capability.
+- Add flyback diodes or proper driver modules for coils, relays, and motors.
+- Keep sensor wires short or add filtering/pull resistors for noisy environments.
+- Treat all GPIO as 3.3 V logic unless the board documentation explicitly says otherwise.
+
 ### 🔹 10.4 ESP8266 Wi-Fi
 
 ESP8266 can connect to routers as a station, create an access point, serve web pages, call HTTP APIs, publish MQTT messages, and receive OTA updates. Wi-Fi current spikes mean stable 3.3 V power is important.
+
+Common Wi-Fi patterns:
+
+| Pattern | Description |
+|---|---|
+| Station mode | ESP8266 joins an existing router and talks to local/cloud services |
+| Access point mode | ESP8266 creates a setup network for provisioning or local control |
+| Web server | Browser sends HTTP requests directly to the device |
+| MQTT client | Device publishes telemetry and subscribes to commands through a broker |
+| Deep-sleep sensor | Device wakes, measures, transmits, and sleeps to save battery |
 
 ### 🔹 11.1 ESP32 Overview
 
@@ -859,9 +900,44 @@ Bluetooth supports controllers, phones, BLE sensors, audio devices, and local pr
 
 Raspberry Pi 5 is suitable for Linux learning, servers, robotics, camera work, AI, computer vision, dashboards, and IoT gateway applications.
 
+**Raspberry Pi 5 details:**
+
+| Feature | Detail |
+|---|---|
+| Processor | Broadcom BCM2712 quad-core Arm Cortex-A76 64-bit CPU at 2.4 GHz |
+| Memory | LPDDR4X variants up to 16 GB |
+| I/O controller | RP1 I/O controller designed by Raspberry Pi |
+| Display | Dual 4Kp60 HDMI output with HDR support |
+| Expansion | PCIe 2.0 x1 interface for fast peripherals through an adapter/HAT |
+| USB | 2 × USB 3.0 and 2 × USB 2.0 |
+| Network | Gigabit Ethernet, dual-band Wi-Fi, Bluetooth 5.0/BLE |
+| Camera/display | 2 × 4-lane MIPI camera/display transceivers |
+| Power | 5 V / 5 A USB-C recommended for full performance |
+| Extras | RTC support, power button, UART debug port |
+
+Use Pi 5 for heavier gateways, computer vision, local AI inference, multi-service dashboards, SSD-backed databases, and high-throughput data collection.
+
 ### 🔹 15.2 Raspberry Pi 4
 
+![Raspberry Pi 4](assets/raspberry-pi/raspberry-pi-4.svg)
+
 Raspberry Pi 4 remains popular for servers, automation, education, media, robotics, and IoT because of its strong ecosystem and broad accessory support.
+
+**Raspberry Pi 4 Model B details:**
+
+| Feature | Detail |
+|---|---|
+| Processor | Broadcom BCM2711 quad-core Cortex-A72 64-bit SoC, listed by Raspberry Pi at 1.8 GHz on current specs |
+| Memory | 1 GB, 2 GB, 4 GB, or 8 GB LPDDR4 variants |
+| Networking | Gigabit Ethernet, dual-band 802.11ac Wi-Fi, Bluetooth 5.0, BLE |
+| USB | 2 × USB 3.0 and 2 × USB 2.0 |
+| Display | 2 × micro-HDMI, up to dual 4K output depending on mode |
+| Camera/display | MIPI CSI camera and MIPI DSI display connectors |
+| GPIO | Standard 40-pin Raspberry Pi header |
+| Storage | microSD card for OS and data |
+| Power | USB-C supply; allow enough current for USB peripherals |
+
+Use Pi 4 when you need a capable Linux computer for dashboards, MQTT brokers, Node-RED, Python automation, camera projects, local databases, or gateway services.
 
 ### 🔹 15.3 Raspberry Pi Zero
 
@@ -869,11 +945,42 @@ Raspberry Pi Zero boards are small Linux computers useful when size, cost, and p
 
 ### 🔹 15.4 Raspberry Pi Compute Module
 
+![Raspberry Pi Compute Module](assets/raspberry-pi/compute-module.svg)
+
 Compute Modules are designed for product integration on custom carrier boards. They are used in industrial, commercial, kiosk, signage, and embedded Linux products.
+
+Compute Module families expose Raspberry Pi compute capability in a compact module format so product designers can choose their own connectors, power design, Ethernet, USB layout, storage, and enclosure. Compute Module 4 is based on Raspberry Pi 4-class silicon, while Compute Module 5 brings Raspberry Pi 5-class performance, ECC-capable memory options, optional eMMC, and richer high-speed interfaces for industrial IoT and edge products.
 
 ### 🔹 15.5 Raspberry Pi Pico
 
+![Raspberry Pi Pico](assets/raspberry-pi/pico.svg)
+
 Raspberry Pi Pico is a microcontroller board based on RP2040 or RP2350-class devices, depending on model. It runs firmware rather than Linux and is programmed with C/C++, MicroPython, or similar tools.
+
+**Raspberry Pi Pico / Pico W details:**
+
+| Feature | Pico / Pico W family detail |
+|---|---|
+| MCU | RP2040 on Pico/Pico W |
+| CPU | Dual-core Arm Cortex-M0+ up to 133 MHz |
+| RAM | 264 KB on-chip SRAM |
+| Flash | 2 MB onboard QSPI flash on common Pico boards |
+| GPIO | 26 multifunction GPIO pins, including analog-capable inputs |
+| Peripherals | UART, SPI, I²C, PWM, ADC, timers, PIO state machines |
+| Wireless | Pico W/WH add 2.4 GHz 802.11n Wi-Fi and Bluetooth 5.2 capability |
+| Programming | Drag-and-drop UF2 over USB, C/C++ SDK, MicroPython |
+
+**Raspberry Pi Pico 2 / Pico 2 W details:**
+
+| Feature | Pico 2 family detail |
+|---|---|
+| MCU | RP2350 family |
+| CPU | Dual Arm Cortex-M33 or dual Hazard3 RISC-V processors at 150 MHz |
+| RAM | 520 KB on-chip SRAM |
+| Wireless | Pico 2 W adds 2.4 GHz 802.11n Wi-Fi and Bluetooth 5.2 |
+| Compatibility | Designed to be software- and hardware-compatible with Pico 1 for many projects |
+
+Use Pico when you need deterministic microcontroller behavior, fast GPIO, PWM, ADC, PIO-generated protocols, low cost, and direct hardware control without Linux.
 
 ### 🔹 16.1 Linux
 
@@ -1228,3 +1335,9 @@ Advanced IoT Systems
 | SDK | Software Development Kit | Development tools and libraries |
 | SoC | System on Chip | Multiple computer functions integrated into one chip |
 | RTOS | Real-Time Operating System | OS designed for predictable timing |
+
+---
+
+## 🔎 Specification Source Notes
+
+Board specifications change by model revision and SKU, so verify exact details against official product pages before designing hardware. Useful official references include Raspberry Pi Pico/Pico 2 product pages, Raspberry Pi 4 Model B specifications, Raspberry Pi 5 specifications, Raspberry Pi Compute Module pages, and Espressif ESP8266/ESP32/ESP32-C-series documentation.
