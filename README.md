@@ -411,7 +411,7 @@ Device A GND ↔ Device B GND
 
 I²C uses SDA and SCL lines with pull-up resistors. Many devices can share the same bus if addresses do not conflict. It is popular for sensors, RTCs, EEPROMs, and small displays.
 
-![I²C protocol](assets/protocols/i2c.svg)
+![I²C protocol](assets/protocols/i2c.png)
 
 ### 🔹 4.3 SPI
 
