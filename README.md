@@ -226,7 +226,7 @@ The important idea is not the shape of the device; it is the computing cycle of 
 
 An embedded system is a computer built into a larger product to perform a focused task. It is usually optimized for cost, power, size, reliability, and predictable behavior rather than general-purpose desktop computing.
 
-![Embedded system architecture](assets/architecture/embedded-system.svg)
+![Embedded system architecture](assets/architecture/embedded-systems.svg)
 
 Examples include washing-machine controllers, car ECUs, drone flight controllers, printer control boards, smart thermostats, medical instruments, traffic lights, and industrial sensors.
 
