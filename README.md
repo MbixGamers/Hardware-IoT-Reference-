@@ -271,7 +271,7 @@ A Raspberry Pi is a common SBC. It includes CPU/SoC, RAM, storage interface, USB
 
 ### 🔹 1.6 MCU vs MPU vs SBC
 
-![MCU vs MPU](assets/architecture/mcu-vs-mpu.svg)
+![MCU vs MPU](assets/architecture/mcu-vs-mpu.png)
 
 | Feature | Microcontroller | Microprocessor | SBC / Microcomputer |
 |---|---|---|---|
