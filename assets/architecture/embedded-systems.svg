@@ -1,4 +1,5 @@
-<svg xmlns="http://w3.org" viewBox="-100 -50 1200 1000" width="100%" height="100%" style="background-color: #f8fafc;">
+<svg xmlns="http://w3.org" viewBox="0 0 1000 900" width="100%" height="100%" style="background-color: #f8fafc;">
+
   <!-- Your internal SVG elements (circles, paths, text labels) stay exactly here -->
   <!-- Definitions for styling and reusable elements -->
   <defs>
